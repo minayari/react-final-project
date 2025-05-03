@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { use } from "react";
-import api from "../assets/api/api";
+import api from "../api/api";
 
 export default function useGetProducts() {
   function queryFn() {

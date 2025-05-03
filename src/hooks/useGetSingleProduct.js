@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import api from "../assets/api/api";
+import api from "../api/api";
 
 export default function useGetSingleProduct(productID) {
   async function queryFn() {

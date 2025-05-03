@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import useGetSingleProduct from "../hooks/useGetSingleProduct";
 import { useEffect } from "react";
+import Loader from "../components/Loader";
+import Modal from "../components/Modal";
 
 export default function SingleProductPage() {
   const { productID } = useParams();
@@ -12,11 +14,11 @@ export default function SingleProductPage() {
   } = useGetSingleProduct(productID);
 
   if (isError) {
-    return <h1>${error.message}</h1>;
+    return <Modal message={error.message} />;
   }
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
 
   return (

@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
-import api from "../assets/api/api";
+import api from "../api/api";
 import SingleProduct from "../components/SingleProduct";
 import { useQuery } from "@tanstack/react-query";
 import useGetProducts from "../hooks/useGetProducts";
+import Loader from "../components/Loader";
+import Modal from "../components/Modal";
 
 export default function MainPage() {
   const { data: products, isLoading, isError, error } = useGetProducts();
 
   if (isError) {
-    return <h1>{error.message}</h1>;
+    return <Modal message={error.message} />;
   }
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
 
   return (
