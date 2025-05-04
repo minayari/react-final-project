@@ -10,11 +10,11 @@ export default function MainPage() {
   const { data: products, isLoading, isError, error } = useGetProducts();
   const [searchProduct, setSearchProducts] = useState("");
 
-  //Desn't work in UseMemo + price checking has issues
+  //Doesn't work in UseMemo
   const filteredProducts = products?.data?.filter(
     (item) =>
       item.title.toLowerCase().includes(searchProduct.toLowerCase()) ||
-      item.price === searchProduct.toString()
+      item.price.toString().includes(searchProduct.toString())
   );
 
   if (isError) {
@@ -29,6 +29,7 @@ export default function MainPage() {
     <>
       <div className="flex justify-center items-center mb-[2rem]">
         <input
+          placeholder="search name or price"
           value={searchProduct}
           onChange={(evt) => setSearchProducts(evt.target.value)}
           type="text"
