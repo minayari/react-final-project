@@ -3,6 +3,7 @@ import MainPage from "./pages/MianPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./components/Layout";
+import CategoryPage from "./pages/CategoryPage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ function App() {
                 path="/product/:productID"
                 element={<SingleProductPage />}
               />
+              <Route path="/product/category" element={<CategoryPage />} />
             </Routes>
           </Layout>
         </BrowserRouter>
