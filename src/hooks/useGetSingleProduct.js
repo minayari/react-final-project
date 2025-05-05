@@ -9,5 +9,6 @@ export default function useGetSingleProduct(productID) {
   return useQuery({
     queryFn,
     queryKey: [`singleProduct${productID}`],
+    retry: 1,
   });
 }

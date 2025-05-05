@@ -4,10 +4,10 @@ import SingleProduct from "../components/SingleProduct";
 import { useQuery } from "@tanstack/react-query";
 import useGetProducts from "../hooks/useGetProducts";
 import Loader from "../components/Loader";
-import Modal from "../components/Modal";
+import ErrorModal from "../components/ErrorModal";
 
 export default function MainPage() {
-  const { data: products, isLoading, isError, error } = useGetProducts();
+  const { data: products, isLoading, isError, error, refetch } = useGetProducts();
   // const [searchProduct, setSearchProducts] = useState("");
   const searchRef = useRef(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -30,14 +30,6 @@ export default function MainPage() {
     );
   }
 
-  if (isError) {
-    return <Modal message={error.message} />;
-  }
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
     <>
       <div>
@@ -58,25 +50,38 @@ export default function MainPage() {
         </div>
       </div>
       <div className="grid grid-cols-4 gap-4">
-        {filteredProducts.length === 0
-          ? products?.data?.map((item) => (
-              <SingleProduct
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                price={item.price}
-              />
-            ))
-          : filteredProducts?.map((item) => (
-              <SingleProduct
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                price={item.price}
-              />
-            ))}
+        {isLoading && <Loader />}
+        {!isLoading &&
+          products &&
+          filteredProducts.length === 0 &&
+          products?.data?.map((item) => (
+            <SingleProduct
+              key={item.id}
+              id={item.id}
+              image={item.image}
+              title={item.title}
+              price={item.price}
+            />
+          ))}
+        {!isLoading &&
+          products &&
+          filteredProducts.length > 0 &&
+          filteredProducts?.map((item) => (
+            <SingleProduct
+              key={item.id}
+              id={item.id}
+              image={item.image}
+              title={item.title}
+              price={item.price}
+            />
+          ))}
+
+        <ErrorModal
+          open={isError}
+          onClose={() => {
+            refetch();
+          }}
+        />
       </div>
     </>
   );
