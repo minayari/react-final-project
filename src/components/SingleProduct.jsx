@@ -4,12 +4,33 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Badge, { badgeClasses } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useCallback, useEffect, useState } from "react";
 
 export default function SingleProduct({ image, title, price, id }) {
   const navigateToSinglePage = useNavigate();
+
+  const addToCart = () => {
+    const saved = localStorage.getItem("cartProducts");
+    const parsed = saved ? JSON.parse(saved) : [];
+
+    const existing = parsed.find((item) => item.id === id);
+
+    let updated;
+
+    if (existing) {
+      updated = parsed.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    } else {
+      updated = [...parsed, { image, title, price, id, quantity: 1 }];
+    }
+
+    localStorage.setItem("cartProducts", JSON.stringify(updated));
+  };
+
   return (
     <>
-      <div className=" ring ring-sky-900/30 rounded-[1.3rem] overflow-hidden p-[1rem] mx-[0.5rem] cursor-pointer flex flex-col justify-between h-full">
+      <div className=" ring ring-sky-900/30 rounded-[1.3rem] overflow-hidden p-[1rem] mx-[0.5rem] cursor-pointer flex flex-col justify-between items-center h-full">
         <div
           onClick={() => {
             event.stopPropagation();
@@ -27,11 +48,13 @@ export default function SingleProduct({ image, title, price, id }) {
           </div>
         </div>
 
-        <div className="my-[0.5rem] bg-cyan-800 relative w-35 h-12 overflow-hidden rounded-md text-white group cursor-pointer">
+        <div
+          onClick={addToCart}
+          className="my-[0.5rem] bg-cyan-800 relative w-35 h-12 overflow-hidden rounded-md text-white group cursor-pointer"
+        >
           <div className="absolute inset-0 flex items-center justify-center transition duration-300 transform group-hover:-translate-y-full">
             Add to cart
           </div>
-
           <div className="absolute inset-0 flex items-center justify-center translate-y-full transition-transform duration-300 group-hover:translate-y-0">
             <IconButton size="small" sx={{ color: "white" }}>
               <ShoppingCartIcon />
