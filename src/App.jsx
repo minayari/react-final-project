@@ -4,7 +4,7 @@ import SingleProductPage from "./pages/SingleProductPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./components/Layout";
 import CategoryPage from "./pages/CategoryPage";
-import Cart from "./pages/Cart";
+import CartPage from "./pages/CartPage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,7 +21,7 @@ function App() {
                 element={<SingleProductPage />}
               />
               <Route path="/product/category" element={<CategoryPage />} />
-              <Route path="/cart" element={<Cart />} />
+              <Route path="/cart" element={<CartPage />} />
             </Routes>
           </Layout>
         </BrowserRouter>

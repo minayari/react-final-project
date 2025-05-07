@@ -1,31 +1,40 @@
 import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import Badge, { badgeClasses } from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { useCallback } from "react";
+import useCart from "../hooks/useCart";
+import useGetProducts from "../hooks/useGetProducts";
 
 export default function SingleProduct({ image, title, price, id }) {
   const navigateToSinglePage = useNavigate();
-  
+  const { products: cartProducts, addProduct } = useCart();
 
-  const addingCart = useCallback(() => {
-    const saved = localStorage.getItem("cartItems");
-    const parsed = saved ? JSON.parse(saved) : [];
-
-    const existing = parsed.find((item) => item.id === id);
-
-    let updated;
-
-    if (existing) {
-      updated = parsed.map((item) =>
-        item.id === id ? { id: item.id, quantity: item.quantity + 1 } : item
-      );
-    } else {
-      updated = [...parsed, { id, quantity: 1 }];
+  const CartBadge = styled(Badge)`
+    & .${badgeClasses.badge} {
+      top: -12px;
+      right: -6px;
     }
+  `;
+  // const addingCart = useCallback(() => {
+  //   const saved = localStorage.getItem("cartItems");
+  //   const parsed = saved ? JSON.parse(saved) : [];
 
-    localStorage.setItem("cartItems", JSON.stringify(updated));
-    return existing;
-  }, [image, title, price, id]);
+  //   const existing = parsed.find((item) => item.id === id);
+
+  //   let updated;
+
+  //   if (existing) {
+  //     updated = parsed.map((item) =>
+  //       item.id === id ? { id: item.id, quantity: item.quantity + 1 } : item
+  //     );
+  //   } else {
+  //     updated = [...parsed, { id, quantity: 1 }];
+  //   }
+
+  //   localStorage.setItem("cartItems", JSON.stringify(updated));
+  //   return existing;
+  // }, [image, title, price, id]);
 
   return (
     <>
@@ -48,7 +57,7 @@ export default function SingleProduct({ image, title, price, id }) {
         </div>
 
         <div
-          onClick={addingCart}
+          onClick={() => addProduct(id)}
           className="my-[0.5rem] bg-cyan-800 relative w-35 h-12 overflow-hidden rounded-md text-white group cursor-pointer"
         >
           <div className="absolute inset-0 flex items-center justify-center transition duration-300 transform group-hover:-translate-y-full">
@@ -57,7 +66,7 @@ export default function SingleProduct({ image, title, price, id }) {
 
           <div className="absolute inset-0 flex items-center justify-center translate-y-full transition-transform duration-300 group-hover:translate-y-0">
             <IconButton>
-              <ShoppingCartIcon sx={{ color: "white" }} />
+              <ShoppingCartIcon />
             </IconButton>
           </div>
         </div>
