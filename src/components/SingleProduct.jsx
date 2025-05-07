@@ -1,16 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import IconButton from "@mui/material/IconButton";
+import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
-import Badge, { badgeClasses } from "@mui/material/Badge";
-import { styled } from "@mui/material/styles";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 
 export default function SingleProduct({ image, title, price, id }) {
   const navigateToSinglePage = useNavigate();
+  
 
-  const addToCart = () => {
-    const saved = localStorage.getItem("cartProducts");
+  const addingCart = useCallback(() => {
+    const saved = localStorage.getItem("cartItems");
     const parsed = saved ? JSON.parse(saved) : [];
 
     const existing = parsed.find((item) => item.id === id);
@@ -19,14 +17,15 @@ export default function SingleProduct({ image, title, price, id }) {
 
     if (existing) {
       updated = parsed.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === id ? { id: item.id, quantity: item.quantity + 1 } : item
       );
     } else {
-      updated = [...parsed, { image, title, price, id, quantity: 1 }];
+      updated = [...parsed, { id, quantity: 1 }];
     }
 
-    localStorage.setItem("cartProducts", JSON.stringify(updated));
-  };
+    localStorage.setItem("cartItems", JSON.stringify(updated));
+    return existing;
+  }, [image, title, price, id]);
 
   return (
     <>
@@ -49,15 +48,16 @@ export default function SingleProduct({ image, title, price, id }) {
         </div>
 
         <div
-          onClick={addToCart}
+          onClick={addingCart}
           className="my-[0.5rem] bg-cyan-800 relative w-35 h-12 overflow-hidden rounded-md text-white group cursor-pointer"
         >
           <div className="absolute inset-0 flex items-center justify-center transition duration-300 transform group-hover:-translate-y-full">
             Add to cart
           </div>
+
           <div className="absolute inset-0 flex items-center justify-center translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-            <IconButton size="small" sx={{ color: "white" }}>
-              <ShoppingCartIcon />
+            <IconButton>
+              <ShoppingCartIcon sx={{ color: "white" }} />
             </IconButton>
           </div>
         </div>
