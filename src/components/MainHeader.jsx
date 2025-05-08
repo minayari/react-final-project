@@ -3,6 +3,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { use, useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import Breadcrumb from "./Breadcrumb";
 
 export default function MainHeader() {
   // const [scrolled, setScrolled] = useState(false);
@@ -17,7 +18,10 @@ export default function MainHeader() {
   const navigateToCart = useNavigate();
 
   return (
-    <div className="mb-[2rem] flex justify-between items-center sticky top-0 bg-white z-50 shadow">
+    <div className="mb-[2rem] px-[1rem] flex justify-between items-center sticky top-0 bg-white z-50 shadow">
+      <div>
+        <Breadcrumb />
+      </div>
       <div>
         <IconButton
           onClick={(evt) => {
@@ -28,8 +32,6 @@ export default function MainHeader() {
           <ShoppingCartIcon fontSize="large" color="primary"></ShoppingCartIcon>
         </IconButton>
       </div>
-
-      <div>bread crumb</div>
     </div>
   );
 }
