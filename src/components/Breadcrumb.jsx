@@ -103,7 +103,7 @@ export default function Breadcrumb() {
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
       >
-        <Typography color="text.primary">main page</Typography>
+        <Typography sx={{ color: "white" }}>main page</Typography>
       </Breadcrumbs>
     );
   }
@@ -115,7 +115,12 @@ export default function Breadcrumb() {
       separator={<NavigateNextIcon fontSize="small" />}
       aria-label="breadcrumb"
     >
-      <Link component={RouterLink} to="/" underline="hover" color="inherit">
+      <Link
+        component={RouterLink}
+        to="/"
+        underline="hover"
+        sx={{ color: "white" }}
+      >
         main page
       </Link>
 
@@ -127,7 +132,7 @@ export default function Breadcrumb() {
         const isLast = index === displayPathnames.length - 1;
 
         return isLast ? (
-          <Typography key={to} color="text.primary">
+          <Typography key={to} sx={{ color: "white" }}>
             {decodeURIComponent(segment)}
           </Typography>
         ) : (

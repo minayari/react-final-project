@@ -37,45 +37,49 @@ export default function Cart() {
   }
 
   return (
-    <div className="grid grid-cols-4 gap-3">
-      {mergedProducts?.length === 0 ? (
-        <div className="flex flex-col justify-center item-center">
-          <div className="mx-auto w-[30rem] h-[5rem] ring ring-cyan-800/70 rounded-[1rem] p-[1rem]">
-            <h1 className="font-bold text-cyan-800/80 text-center">
-              cart is empty
-            </h1>
+    <div className="mx-[5rem] my-[8rem]">
+      <div className="grid grid-cols-3 gap-3 w-[60rem] mx-auto">
+        {mergedProducts?.length === 0 ? (
+          <div className="flex flex-col justify-center item-center">
+            <div className="mx-auto w-[30rem] h-[5rem] ring ring-cyan-800/70 rounded-[1rem] p-[1rem]">
+              <h1 className="font-bold text-cyan-800/80 text-center">
+                cart is empty
+              </h1>
+            </div>
           </div>
-        </div>
-      ) : (
-        mergedProducts?.map((item) => (
-          <div
-            key={item?.id}
-            className="ring ring-cyan-800/50 m-[1rem] p-[1rem] rounded-[1rem] flex flex-col justify-between items-center"
-          >
-            <div>
-              <img
-                className="aspect-square object-contain w-full"
-                src={item?.image}
-                alt="cart product"
-              />
-              <div className="mt-[0.8rem]">
-                <h1 className="font-bold text-cyan-900">{item?.title}</h1>
-                <p className="mt-[0.25rem] text-cyan-900/70">${item?.price}</p>
+        ) : (
+          mergedProducts?.map((item) => (
+            <div
+              key={item?.id}
+              className="ring ring-cyan-800/50 m-[1rem] p-[1rem] rounded-[1rem] flex flex-col justify-between items-center"
+            >
+              <div>
+                <img
+                  className="aspect-square object-contain w-full"
+                  src={item?.image}
+                  alt="cart product"
+                />
+                <div className="mt-[0.8rem]">
+                  <h1 className="font-bold text-cyan-900">{item?.title}</h1>
+                  <p className="mt-[0.25rem] text-cyan-900/70">
+                    ${item?.price}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <IconButton onClick={() => decreaseProduct(item?.id)}>
+                  <RemoveCircleOutlineIcon />
+                </IconButton>
+                <span>{item?.quantity}</span>
+                <IconButton onClick={() => addProduct(item?.id)}>
+                  <ControlPointIcon />
+                </IconButton>
               </div>
             </div>
-
-            <div>
-              <IconButton onClick={() => decreaseProduct(item?.id)}>
-                <RemoveCircleOutlineIcon />
-              </IconButton>
-              <span>{item?.quantity}</span>
-              <IconButton onClick={() => addProduct(item?.id)}>
-                <ControlPointIcon />
-              </IconButton>
-            </div>
-          </div>
-        ))
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 

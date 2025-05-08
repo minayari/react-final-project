@@ -10,7 +10,7 @@ export default function Category({ products }) {
   const handelCategory = useCallback(
     (category) => {
       const categorized = products.filter((pro) => pro.category === category);
-      navigateToCategoryPage("/product/category", { state: { categorized } });
+      navigateToCategoryPage("/category", { state: { categorized } });
     },
     [products]
   );

@@ -31,22 +31,26 @@ export default function MainPage() {
   }, [products]);
 
   return (
-    <>
-      <div>
-        <div className="flex justify-center items-center mb-[2rem]">
+    <div>
+      <div className="bg-[url('/img/headerBG2.jpg')] w-full h-[20rem] bg-center bg-cover bg-fixed h-screen">
+        <div className="absolute inset-0 bg-black/50"></div>
+      </div>
+
+      <div className="mx-[4rem]">
+        <div className="flex justify-center items-center my-[4rem]">
           <input
             placeholder="search name or price"
             // value={searchProduct}
             ref={searchRef}
             onChange={searchHandler}
             type="text"
-            className="w-[20rem] border-[2px] border-solid border-cyan-800 rounded-[0.5rem] focus: outline-none p-[0.15rem]"
+            className="w-[30rem] border-[2px] border-solid border-cyan-800 rounded-[0.5rem] focus: outline-none p-[0.15rem]"
           />
         </div>
 
         <Category products={products?.data} />
       </div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-4 mx-[4rem]">
         {isLoading && <Loader />}
         {!isLoading &&
           products &&
@@ -73,13 +77,17 @@ export default function MainPage() {
             />
           ))}
 
-        <ErrorModal
-          open={isError}
-          onClose={() => {
-            refetch();
-          }}
-        />
+        <div className="flex justify-center- items-center">
+          <div>
+            <ErrorModal
+              open={isError}
+              onClose={() => {
+                refetch();
+              }}
+            />
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
