@@ -1,1 +1,95 @@
 @import "tailwindcss";
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.custom-inner-shadow {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+@media only screen and (max-width: 480px) {
+  .banner {
+    width: 100%;
+  }
+
+  .categoty {
+    display: flex;
+    flex-direction: column;
+  }
+  .categoty > div {
+    height: 5rem;
+  }
+
+  .input {
+    width: 10rem;
+    font-size: 1rem;
+  }
+
+  .manu-resp {
+    max-width: 15rem;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .main-products-resp {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .singleProducts-container-resp {
+    width: 100%;
+    height: 25rem;
+  }
+
+  .singleProducts-items-resp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .singleProducts-img-resp {
+    width: 50%;
+  }
+
+  .singleProducts-info-resp {
+    margin-left: 1rem;
+    width: 50%;
+    font-size: 1.5rem;
+  }
+
+  .singleProducts-btn-resp {
+    min-height: 2.5rem !important;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .singleProducts-container-resp {
+    max-height: 35rem;
+  }
+
+  .singleProducts-items-resp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .singleProducts-info-resp h2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 30rem;
+    -webkit-line-clamp: 3;
+    margin-bottom: 0.5rem;
+  }
+}
+
+

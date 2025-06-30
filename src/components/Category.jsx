@@ -5,45 +5,72 @@ export default function Category({ products }) {
   const navigateToCategoryPage = useNavigate();
 
   const STYLE =
-    "text-center m-[0.5rem] border-[2px] border-solid border-cyan-800 rounded-[1rem] transition duration-300 ease-in-out transform scale-100 hover:scale-105 transition duration-300 hover:bg-cyan-800 hover:text-white hover:cursor-pointer ";
+    "flex-shrink min-x-[100px] basis-1/5 text-center m-[0.5rem] overflow-hidden";
 
   const handelCategory = useCallback(
     (category) => {
       const categorized = products.filter((pro) => pro.category === category);
-      navigateToCategoryPage("/category", { state: { categorized } });
+      navigateToCategoryPage("/category", { state: { categorized, category } });
     },
     [products]
   );
 
   return (
-    <div className="grid grid-cols-2 gap-10 h-[15rem] mb-[2rem] ">
+    <div className="flex justify-between overflow-hidden categoty">
       <div
         className={STYLE}
         data-category="men's clothing"
         onClick={(evt) => handelCategory(evt.currentTarget.dataset.category)}
       >
-        Men's Clothes
+        <div>
+          <img
+            className="w-full h-[80%] object-cover rounded-[1rem] "
+            src="./img/mens.jpg"
+          />
+        </div>
+        <h2 className="mt-[0.5rem] text-cyan-800">Men's Collection</h2>
       </div>
+
       <div
         className={STYLE}
         data-category="women's clothing"
         onClick={(evt) => handelCategory(evt.currentTarget.dataset.category)}
       >
-        Women's Clothes
+        <div>
+          <img
+            className="w-full h-[80%] rounded-[1rem] object-cover"
+            src="./img/womens.jpg"
+          />
+          <h2 className="mt-[0.5rem] text-cyan-800">Women's Collection</h2>
+        </div>
       </div>
+
       <div
         className={STYLE}
         data-category="jewelery"
         onClick={(evt) => handelCategory(evt.currentTarget.dataset.category)}
       >
-        Accessories
+        <div>
+          <img
+            className="w-full h-[80%] rounded-[1rem] object-cover"
+            src="./img/accessories.jpg"
+          />
+          <h2 className="text-cyan-800 mt-[0.5rem]">Accessories</h2>
+        </div>
       </div>
+
       <div
         className={STYLE}
         data-category="electronics"
         onClick={(evt) => handelCategory(evt.currentTarget.dataset.category)}
       >
-        Electronics
+        <div>
+          <img
+            className="w-full h-[80%] rounded-[1rem] object-cover"
+            src="./img/electronics.jpg"
+          />
+        </div>
+        <h2 className="text-cyan-800 mt-[0.5rem]">Electronics</h2>
       </div>
     </div>
   );

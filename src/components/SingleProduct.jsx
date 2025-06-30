@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import Badge, { badgeClasses } from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
-import useCart from "../hooks/useCart";
+import useCart from "../store/useCart";
 import useGetProducts from "../hooks/useGetProducts";
 import { useState } from "react";
 import { useCallback } from "react";
@@ -51,19 +51,20 @@ export default function SingleProduct({ image, title, price, id }) {
 
   return (
     <>
-      <div className=" ring ring-sky-900/30 rounded-[1.3rem] overflow-hidden p-[1rem] mx-[0.5rem] cursor-pointer flex flex-col justify-between items-center h-full">
-        <div
-          onClick={() => {
-            event.stopPropagation();
-            navigateToSinglePage(`/product/${id}`);
-          }}
-        >
+      <div
+        onClick={() => {
+          event.stopPropagation();
+          navigateToSinglePage(`/product/${id}`);
+        }}
+        className="ring ring-sky-900/30 rounded-[1.3rem] overflow-hidden p-[1rem] mx-[0.5rem] cursor-pointer flex flex-col justify-between items-center h-full singleProducts-container-resp"
+      >
+        <div className="singleProducts-items-resp">
           <img
-            className="aspect-square object-contain w-full"
+            className="aspect-square object-contain w-full singleProducts-img-resp"
             src={image}
             alt="product-img"
           />
-          <div className="mt-[0.5rem]">
+          <div className="mt-[0.5rem] singleProducts-info-resp">
             <h2 className="text-cyan-900">{title}</h2>
             <p className="text-cyan-900/70">${price}</p>
           </div>
@@ -75,7 +76,7 @@ export default function SingleProduct({ image, title, price, id }) {
             pointerEvents: clicked ? "none" : "auto",
             userSelect: "none",
           }}
-          className={`my-[0.5rem] ${
+          className={`my-[0.5rem] singleProducts-btn-resp ${
             clicked
               ? "bg-white text-cyan-800 border-[1px] border-solid border-cyab-800"
               : "bg-cyan-800 text-white"
@@ -86,7 +87,7 @@ export default function SingleProduct({ image, title, price, id }) {
           </div>
 
           <div className="absolute inset-0 flex items-center justify-center translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-            <IconButton>
+            <IconButton className="">
               <ShoppingCartIcon />
             </IconButton>
           </div>

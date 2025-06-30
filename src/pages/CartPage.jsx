@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import useGetCartProducts from "../hooks/useGetCartProducts";
 import SingleProduct from "../components/SingleProduct";
-import useCart from "../hooks/useCart";
+import useCart from "../store/useCart";
 import Loader from "../components/Loader";
 import ErrorModal from "../components/ErrorModal";
 import { useEffect } from "react";

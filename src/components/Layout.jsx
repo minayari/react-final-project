@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import MainHeader from "./MainHeader";
 import { useLocation } from "react-router-dom";
+import Menu from "./Menu";
 
 export default function Layout({ children }) {
-  const [isScrolled, setIsScrolled] = useState(false);
+  // const [isScrolled, setIsScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setIsScrolled(window.scrollY > 0);
+  //   };
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <>
-      <MainHeader isScrolled={isScrolled} />
+      {/* <MainHeader /> */}
       {children}
+      <Menu/>
     </>
   );
 }

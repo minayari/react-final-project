@@ -6,35 +6,35 @@ import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./Breadcrumb";
 import { useLocation } from "react-router-dom";
 
-export default function MainHeader({ isScrolled }) {
-  const navigateToCart = useNavigate();
+export default function MainHeader() {
+  // const navigateToCart = useNavigate();
 
-  const location = useLocation();
-  const [scrolled, setScrolled] = useState(false);
+  // const location = useLocation();
+  // const [scrolled, setScrolled] = useState(false);
 
-  const isHome = location.pathname === "/";
+  // const isHome = location.pathname === "/";
 
-  useEffect(() => {
-    if (!isHome) return;
+  // useEffect(() => {
+  //   if (!isHome) return;
 
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+  //   const handleScroll = () => {
+  //     setScrolled(window.scrollY > 50);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHome]);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [isHome]);
 
-  const headerClass = `flex justify-between items-center px-[1rem] fixed top-0 left-0 w-full z-50 transition-colors duration-300
-    ${
-      isHome
-        ? scrolled
-          ? "bg-cyan-800 shadow"
-          : "bg-transparent"
-        : "bg-cyan-800 shadow"
-    }`;
+  // const headerClass = `flex justify-between items-center px-[1rem] fixed top-0 left-0 w-full z-50 transition-colors duration-300
+  //   ${
+  //     isHome
+  //       ? scrolled
+  //         ? "bg-cyan-800 shadow"
+  //         : "bg-transparent"
+  //       : "bg-cyan-800 shadow"
+  //   }`;
   return (
-    <div className={headerClass}>
+    <div className=" bg-cyan-800 flex justify-between items-center px-[1rem] fixed top-0 left-0 w-full z-50">
       <div>
         <Breadcrumb />
       </div>
